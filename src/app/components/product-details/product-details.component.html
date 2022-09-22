@@ -1,0 +1,74 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentProduct.id">
+    <h4>Product</h4>
+    <div>
+      <label><strong>ProductName:</strong></label> {{ currentProduct.ProductName }}
+    </div>
+    <div>
+      <label><strong>CategoryName:</strong></label>
+      {{ currentProduct.CategoryName }}
+    </div>
+   
+
+    <a
+      class="badge badge-warning"
+      routerLink="/tutorials/{{ currentProduct.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentProduct">
+    <br />
+    <p>Please click on a Tutorial...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentProduct.id" class="edit-form">
+    <h4>Product</h4>
+    <form>
+      <div class="form-group">
+        <label for="ProductName">ProductName</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ProductName"
+          [(ngModel)]="currentProduct.ProductName"
+          name="ProductName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">CategoryName</label>
+        <input
+          type="text"
+          class="form-control"
+          id="CategoryName"
+          [(ngModel)]="currentProduct.CategoryName"
+          name="CategoryName"
+        />
+      </div>
+
+      
+    </form>
+
+
+    <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateTutorial()"
+    >
+      Update
+    </button>
+    <!-- <p>{{ message }}</p> -->
+  </div>
+
+  <div *ngIf="!currentProduct.id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</ng-template>
